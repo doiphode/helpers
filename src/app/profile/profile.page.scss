@@ -1,0 +1,46 @@
+.row{
+	border-bottom: 1px solid darkgray;
+	.col1{
+		ion-label{
+			line-height: 0;
+			vertical-align: bottom;
+		}
+	}
+	.col2{
+		color: darkgray;
+		text-align: right;
+		.textel{
+			--placeholder-opacity: 1 !important;
+		}
+		
+		ion-label{
+			line-height: 0;
+			vertical-align: bottom;
+		}
+	}
+}
+
+.changepwdrow{
+	margin-top: 15px;
+	padding-bottom: 15px;
+	border: 0;
+}
+
+.changepassword{
+    color: #5BCAA4;
+	line-height: 1px;
+}
+
+.deleteaccount{	
+	bottom: 0;
+    position: absolute;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 40px;
+	color: darkgray;
+	line-height: 1px;	
+}
+
+.collbl.ios{
+	padding-left: 8px !important;
+}

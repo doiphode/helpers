@@ -1,0 +1,79 @@
+app-login {
+    
+}
+
+.logintitle{
+    margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.formcenter{
+    text-align: center;
+    justify-content: center;
+    background: white;
+
+    ion-col{
+        position: fixed;
+        top: 44%;
+        /*left: 50%;*/
+        left: 0%;
+        width: 30em;
+        height: 18em;
+        margin-top: -9em;
+        /*margin-left: -12.9em;*/
+        margin-left: 0;
+    }
+}
+
+$white-color: #fff;
+$height100: 100%;
+
+ion-grid {
+    width:100%;
+    height: $height100;
+    background: #dfdfdf;
+}
+
+ion-row {
+    height: $height100;
+}
+
+ion-col {
+   
+    background: $white-color;
+}
+
+ion-button {
+    font-weight: 300;
+}
+
+@media only screen and (min-width: 600px) {
+    ion-grid {
+        height: auto;
+    }
+}
+
+ion-content,ion-grid{
+    background: ghostwhite;
+}
+ion-item{
+    /*--background: #3880ff;
+    --color: #fff; */
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    width: 80%;
+    margin: 0 auto;
+}
+ion-button{
+    --background: #5BCAA4;
+    width: 60%;
+    margin: 0 auto;
+    width: 60%;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.forgotpwd{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}

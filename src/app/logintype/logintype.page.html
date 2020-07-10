@@ -1,0 +1,35 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-grid class="logintypegrid" >
+      <ion-row color="primary" justify-content-center class='formcenter'>
+    
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          <div class="diventeras"  text-center>
+            <!-- <h3><img src="assets/icon/favicon-96x96.png"></h3> -->
+            <label >Enter as</label>
+          </div>
+          
+          <div  padding>
+            <ion-button size="medium" type="button" class="logintypebutton" (click)="staffrequests();" >NHS Staff</ion-button>
+          </div>
+
+          <div padding>
+            <ion-button size="medium" type="button" class="logintypebutton" (click)="helperrequests();">Helper</ion-button>
+          </div>
+          
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

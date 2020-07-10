@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+       
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+      <ion-row color="primary" justify-content-center class='formcenter'>
+
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center class="divtextcenter">
+            <ion-label>Registration form</ion-label>
+          </div>
+          <div padding>
+            <ion-item>
+            	<ion-input type="text" class='inputel' [(ngModel)]='reg_fname' placeholder="First Name"></ion-input>
+            </ion-item>
+            <ion-item>
+              	<ion-input type="text" class='inputel' [(ngModel)]='reg_lname' placeholder="Last Name"></ion-input>
+            </ion-item>
+            <ion-item style='display: none;'>
+              	<ion-input type="text" class='inputel' [(ngModel)]='reg_username' placeholder="Username"></ion-input>
+            </ion-item>
+            <ion-item>
+              	<ion-input type="text" class='inputel' [(ngModel)]='reg_email' placeholder="Email"></ion-input>
+            </ion-item>
+            <ion-item >
+                <ion-input [(ngModel)]='reg_mobile' class='inputel' placeholder="Mobile number" (keypress)="numberOnlyValidation($event)" maxlength="11"  ></ion-input>
+            </ion-item>
+            <ion-item>
+              	<ion-input type="password" class='inputel' [(ngModel)]='reg_password' placeholder='Password' minlength="6" maxlength="20"></ion-input>
+            </ion-item>
+            <ion-item> 
+              	<ion-input type="password" class='inputel' [(ngModel)]='reg_confirmpassword' placeholder='Confirm Password' minlength="6" maxlength="20"></ion-input>
+            </ion-item>
+            <ion-item>
+            	<ion-label class='inputel' >User Type</ion-label>
+              	<ion-select placeholder="Select" [(ngModel)]="usertype" (ionChange)="onUsertypeChange($event)" >
+      			    <ion-select-option [value]="0" >Select</ion-select-option>
+                <ion-select-option [value]="2" >Staff</ion-select-option>
+      			    <ion-select-option [value]="3" >Helper</ion-select-option>
+      			      
+      			   </ion-select>
+            </ion-item>
+            <ion-item [hidden]=hiddenpostcode >
+                <ion-input [(ngModel)]="postcode" placeholder='Your Postcode' (ionChange)="changepostcode()" ></ion-input>
+            </ion-item>
+
+            <div [hidden]=hiddenhospitalname>
+                
+                <ion-searchbar type="text" [(ngModel)]="hospital" (ionInput)="searchHospital($event)" placeholder="Enter Hospital name" style="text-align: left;"></ion-searchbar>
+
+                <ion-list *ngIf="hospitalList.length > 0">
+                    <ion-item *ngFor="let hospital of hospitalList" (click)="selectHospital(hospital['id'],hospital['name'])"  >{{ hospital['name'] }}</ion-item>
+                </ion-list>
+            </div>
+            
+          </div>
+          <div padding>
+          	<ion-item lines="none" style="border: 0;">
+              <ion-button size="medium" type="button" (click)='registerUser()'  expand="block">REGISTER</ion-button>
+            </ion-item>
+            
+          </div>
+          <div padding class="text-center" class="loginbutton">
+          	<span (click)='openLoginPage()'><b>Login</b></span> 
+          </div>
+
+          <ion-item lines="none" >
+              <p class="p_termcondition" >By registering you agree to the <br><label class="termcondition" (click)="openTermcondition()">Terms and Conditions</label> & <label class="termcondition" (click)="openPolicy()">Privacy Policy</label></p>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+</ion-content>

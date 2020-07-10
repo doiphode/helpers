@@ -1,0 +1,167 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-row>
+       	<ion-col style='font-size: 15px;'>
+
+            <ion-grid style="margin-top: 20px;">
+                  <ion-row class="row">
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>First Name</ion-label>
+                    </ion-col>
+                    <ion-col class="col2" size='8.5'>
+                      <ion-input type="text" [(ngModel)]='firstname' placeholder="First Name" class="textel" required ></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                  <ion-row class="row">
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>Last Name</ion-label>
+                    </ion-col>
+                    <ion-col class="col2" size='8.5'>
+                      <ion-input type="text" [(ngModel)]='lastname' placeholder="Last Name" class="textel" name="name" required></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                  <ion-row class="row">
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>Email</ion-label>
+                    </ion-col>
+                    <ion-col class="col2 collbl" size='8.5' style="margin-bottom: 17px; padding-left: 13px;">
+                      <ion-label>{{email}}</ion-label>  
+                      <ion-input type="text" [(ngModel)]='email' placeholder="Email" name="email" class="textel" style="display: none;" disabled></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                  <ion-row class="row" *ngIf="userrole == 3">
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>Postcode</ion-label>
+                    </ion-col>
+                    <ion-col class="col2" size='8.5'>
+                      <ion-input type="text" [(ngModel)]='postcode' placeholder="Postcode" class="textel" name="postcode"  ></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                  <ion-row  class="row" *ngIf="userrole == 2">
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>Hospital</ion-label>
+                    </ion-col>
+                    <ion-col class="col2 " size='8.5' >
+                      <ion-input type="text" [(ngModel)]='hospital' placeholder="Hospital" class="textel" name="hospital" (ionInput)="searchHospital($event)"></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                  <ion-row [hidden]=hiddenhospital class="row" *ngIf="userrole == 2"> 
+                      <ion-col size='12'>
+                        <div >
+                          <strong *ngIf="hospitalList.length == 0">{{searchlabel}}</strong>
+                          <ion-list *ngIf="hospitalList.length > 0">
+                              <ion-item *ngFor="let hospital of hospitalList" (click)="selectHospital(hospital['id'],hospital['name'])"  >{{ hospital['name'] }}</ion-item>
+                          </ion-list>
+                      </div>
+                      </ion-col>
+                  </ion-row>
+
+                  <ion-row class="row" >
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>Phone</ion-label>
+                    </ion-col>
+                    <ion-col class="col2" size='8.5'>
+
+                      <ion-input  [(ngModel)]='contact' placeholder="Your contact no." name="contact" (keypress)="numberOnlyValidation($event)" maxlength="11" class="textel" ></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                  <ion-row class="row" *ngIf="userrole == 2" style="padding-bottom: 15px;">
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>User type</ion-label>
+                    </ion-col>
+                    <ion-col class="col2 collbl" size='8.5' style=" padding-left: 13px;">
+                        <ion-label >Staff</ion-label>
+                    </ion-col>
+                  
+                  </ion-row>
+ 
+                  <ion-row class="row" *ngIf="userrole == 3" style="padding-bottom: 15px;">
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>User type</ion-label>
+                    </ion-col>
+                    <ion-col class="col2 collbl" size='8.5' style="  padding-left: 13px;">
+                        <ion-label >Helper</ion-label>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                  <ion-row class="changepwdrow" >
+                    <ion-col class="col1" style="line-height: 14px;" >
+                        <ion-label class="changepassword" (click)="toggleChangePassword()"><strong>Change your password</strong></ion-label>
+                    </ion-col>
+                    
+                  </ion-row>
+
+                  <ion-row class="row" [hidden]=hiddenpassword>
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label style="vertical-align: middle;">Current Password</ion-label>
+                    </ion-col>
+                    <ion-col class="col2" size='8.5'>
+                        <ion-input type="password" [(ngModel)]='oldpassword' placeholder="Enter current password" minlength="6" maxlength="20" class="textel" ></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                  <ion-row class="row" [hidden]=hiddenpassword>
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label>Password</ion-label>
+                    </ion-col>
+                    <ion-col class="col2" size='8.5'>
+                        <ion-input type="password" [(ngModel)]='password' placeholder="Enter new password" minlength="6" maxlength="20" class="textel" ></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+                   <ion-row class="row" [hidden]=hiddenpassword>
+                    <ion-col class="col1" size='3.5'>
+                        <ion-label style="vertical-align: middle;">Re-enter password</ion-label>
+                    </ion-col>
+                    <ion-col class="col2" size='8.5'>
+                        <ion-input type="password" [(ngModel)]='repassword' placeholder="Re-enter password" minlength="6" maxlength="20" class="textel" ></ion-input>
+                    </ion-col>
+                  
+                  </ion-row>
+
+
+
+              </ion-grid>
+
+        </ion-col>
+    </ion-row>
+
+    <ion-row *ngIf=" (userrole == 2 || userrole == 3) && userid > 0 && userrole2 == userrole" >
+       	<ion-item class="signup-col" lines="none" style="margin: 0 auto;">
+          	<ion-button size="medium" class="submit-btn" (click)="updateProfile()" full type="submit" >Save</ion-button>
+       	</ion-item>
+    </ion-row>
+
+    <ion-row style="display: none;" >
+        <ion-col class="col1 deleteaccount" style="font-size: 15px;" >
+            <ion-label (click)="deleteAccount()"><strong>Delete my account</strong></ion-label>
+        </ion-col>
+    </ion-row>
+
+</ion-content>

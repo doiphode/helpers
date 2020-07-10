@@ -1,0 +1,36 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+       
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+      <ion-row color="primary" justify-content-center class='formcenter'>
+
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          	
+          	<div padding >
+          		<div class="logintitle"  text-center>
+	            	<h2>Give feedback</h2>
+	          	</div>
+            	<ion-item lines="none">
+            		 <ion-textarea class="feedbacktextarea" placeholder="Enter feedback" [(ngModel)]='feedback' maxlength="400" row="15" style="height: 180px;" ></ion-textarea>
+	              	
+	            </ion-item>
+
+	            <ion-item lines="none" >
+	            	<ion-button size="default" type="button"  expand="block" (click)="submitFeedback()">Submit</ion-button>
+	            </ion-item>
+          	</div>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

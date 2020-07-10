@@ -1,0 +1,153 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="myrequests"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="../assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-grid class="requestgrid" >
+      <ion-row color="primary" justify-content-center class='formcenter'>
+
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          <div class="divtextcenter"  text-center>
+            <label >Request for...</label>
+          </div>
+          
+          <div  padding>
+            <h3 class="requestitemheading" color="tertiary">Essentials</h3>
+          </div>
+
+          <div padding *ngIf="status==1" lines="none" style="margin-top: 10px;">
+              <ion-button size="medium" type="button" class="requestsbutton" (click)="contactstaff()">Contact</ion-button>
+                
+          </div>
+
+          <div [hidden]=hiddennotifications>
+              <ion-item class="divraw" *ngIf="notificationList.length > 0">
+                  <label >Notifications</label>
+              </ion-item>
+
+              <table class="notificationTable" width='100%' border='1' style='border-collapse: collapse;' *ngIf="notificationList.length > 0">
+                  <thead>
+                      <tr>
+                          <th widht='60%'>Notification</th>
+                          <th widht='40%'>Date & Time</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let item of notificationList;">
+                          <td>{{item['message']}}</td>
+                          <td>{{item['created_at']}}</td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+          <div [hidden]=hiddenviewhelperdetails class="helperdetail">
+              <ion-grid style="margin-top: 20px;">
+                  
+                <ion-row class="row">
+                    <ion-col class="col1" size='4.5'>
+                        <ion-label>Helper name</ion-label>
+                    </ion-col>
+                    <ion-col class="col2" size='7'>
+                        <label>{{hname}}</label>
+                    </ion-col>
+                </ion-row>
+
+              </ion-grid>
+          </div>
+
+          <ion-item class="divraw" style='display: none;'>
+            <label >Raw</label>
+          </ion-item>
+          
+          <div class="divraw" padding>
+
+            <ion-card *ngFor="let category of categoryList; let i = index" [hidden]="category['hidden']" >
+                  
+              <ion-card-header  >
+                <ion-card-title style='text-align: left;' (click)="expandCategory(i)"  class="categoryname"> 
+                  {{category['name']}} 
+                  <ion-icon *ngIf="!category['expand']" name="chevron-up-outline" style="float: right;"></ion-icon><ion-icon name="chevron-down-outline" style="float: right;" *ngIf="category['expand']"></ion-icon>
+                </ion-card-title>
+                <div style="width: 100%;" *ngIf="category['expand']" >
+                    <ion-textarea [(ngModel)]='category["text"]' class="textarea categorytextarea" [placeholder]="category['placeholder']" disabled="{{category['disabled']}}"  ></ion-textarea>
+                </div>
+              </ion-card-header>
+
+            </ion-card>
+
+            
+            <ion-list style="display: none;">
+              <ion-item *ngFor="let product of productsList;" >
+                <ion-label>{{product['name']}}</ion-label>
+                <ion-checkbox slot="end" [(ngModel)]='product.checked' value="{{product['id']}}" disabled="{{product.disabled}}" ></ion-checkbox>
+              </ion-item>
+
+              <ion-item>
+                <ion-label>Other</ion-label>
+                <ion-checkbox slot="end" [(ngModel)]='checkother' value="other" (ionChange)="selectOther()" [disabled]=disableother></ion-checkbox>
+              </ion-item>
+            </ion-list> 
+
+            <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)">
+              <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+              </ion-infinite-scroll-content>
+            </ion-infinite-scroll>
+
+
+          </div>
+
+          <ion-item [hidden]=hiddenotheritems>
+            <ion-textarea class="textarea" placeholder="Request for other items here.." [disabled]=disableother [(ngModel)]='otherrequest' ></ion-textarea>
+          </ion-item>
+
+          <div >
+            <ion-item>
+              <ion-label position="floating">Requesting for date</ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" min="{{requestminDate}}" max="{{requestmaxDate}}" [(ngModel)]='requestDate' disabled="{{disablrequestDate}}" ></ion-datetime>
+            </ion-item>
+            <ion-item style='display: none;'>
+              <ion-label position="floating">Request Time</ion-label>
+              <ion-datetime displayFormat="H:mm:s" [(ngModel)]='requestTime' disabled="{{disablrequestTime}}"></ion-datetime>
+            </ion-item>
+          </div>
+          
+          <div [hidden]=hiddenreviewbutton padding>
+            <ion-button size="medium" type="button" class="requestsbutton" (click)="requestItems()" >Review</ion-button>
+          </div>
+          
+          <ion-item [hidden]=hiddenfeedback>
+            <ion-textarea class="textarea" placeholder="Enter feedback" [(ngModel)]='feedback' maxlength="400"  ></ion-textarea>
+          </ion-item>
+          <div [hidden]=hiddenfeedback padding>
+            <ion-button size="medium" type="button" class="requestsbutton" (click)="feedbackRequestItems()" >Feedback</ion-button>
+          </div>
+
+          <div *ngIf="status == 1" style="margin-top: 30px;">
+            <ion-label>Help received? <ion-toggle color="success" [(ngModel)]='checked' (ionChange)="receivedRequest()" style="padding-top: 3px;padding-bottom: 6px; margin-left: 10px;vertical-align: middle;"></ion-toggle></ion-label>
+          </div>
+          
+          <div class="divsubmitbutton" padding>
+            <ion-button [hidden]=hiddeneditsubmit size="medium" type="button" class="requestsbutton" (click)="editRequest()" >Edit</ion-button>&nbsp;
+            <ion-button [hidden]=hiddenrequestsubmit size="medium" type="button" class="requestsbutton" (click)="submitRequest()" >{{submitlabel}}</ion-button>
+            <ion-button [hidden]=hiddenrepostrequest size="medium" type="button" class="requestsbutton" (click)="submitRequest()" >Re-post</ion-button>
+
+            <ion-item [hidden]=hiddenrequestcancel lines="none">
+              <ion-button size="medium" type="button" class="requestsbutton" (click)="cancelRequest()" color="danger" >Cancel Request</ion-button>
+            </ion-item>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+    
+</ion-content>

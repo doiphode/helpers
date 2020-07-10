@@ -1,0 +1,80 @@
+app-forgotpwd {
+    
+}
+
+.logintitle{
+   	margin-top: 50px;
+    margin-bottom: 40px;
+}
+
+.formcenter{
+    text-align: center;
+    justify-content: center;
+
+    background: white;
+
+    ion-col{
+        position: fixed;
+        top: 50%;
+        /*left: 50%;*/
+        left: 0%;
+        width: 30em;
+        height: 18em;
+        margin-top: -9em;
+        /*margin-left: -12.9em;*/
+        margin-left: 0;
+    }
+}
+
+$white-color: #fff;
+$height100: 100%;
+
+ion-grid {
+    width:100%;
+    height: $height100;
+    background: #dfdfdf;
+}
+
+ion-row {
+    height: $height100;
+}
+
+ion-col {
+    background: $white-color;
+}
+
+
+ion-button{
+    font-weight: bold;
+    --background: #5BCAA4;
+    width: 60%;
+    margin: 0 auto;
+    font-size: 18px;
+}
+
+@media only screen and (min-width: 600px) {
+    ion-grid {
+        height: auto;
+    }
+}
+
+ion-content,ion-grid{
+    background: ghostwhite;
+}
+
+.txtitem{
+    /* --background: #3880ff;
+    --color: #fff; */
+    border: 1px solid gray;
+    margin-bottom: 5px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.colorred{
+    color: red;
+}
+
+.loginlink{
+    margin-top: 20px;
+}

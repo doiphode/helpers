@@ -1,0 +1,58 @@
+.requestgrid{
+	text-align: center;
+}
+.bold{
+    font-weight: bold;
+}
+.textarea{
+    text-align: left;
+}
+.divtextcenter{
+	margin-top: 50px;
+}
+.requestsbutton{
+	margin: auto;margin-top: 50px;width: 150px;
+
+}
+.requestitemheading{
+    
+    border: 1px solid #5BCAA4;
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 40px;
+    background: #5BCAA4;
+    color: white;
+    border-radius: 10px;
+}
+
+.requesttype{
+	font-weight: bold;
+	margin-top: 50px;
+	margin-bottom: 10px;
+}
+
+table{
+    thead{
+        background: lightgray;
+    }
+    th,td{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+    
+}
+ 
+.cardgrid{
+    font-size: 15px;
+    color: gray;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+ion-card-header{
+    padding: 7px !important;
+    color: darkgray;
+}

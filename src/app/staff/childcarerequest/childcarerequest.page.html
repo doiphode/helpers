@@ -1,0 +1,297 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="myrequests"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="../assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+	<ion-grid class="requestgrid" >
+      <ion-row color="primary" justify-content-center class='formcenter'>
+
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+
+            <!-- Entry form (start) -->
+            <div [hidden]=hiddenentryform>
+                <div class="divtextcenter"  text-center>
+                  <label >Request for...</label>
+                </div>
+              
+                <div  padding>
+                  <h3 class="requestitemheading" color="tertiary">Childcare</h3>
+                </div>
+                
+                <div padding>
+
+                    <!-- Children 1 (start) -->
+                    <ion-list class="childdetails" >
+                        <ion-item style="display: none;" >
+                            <ion-input name="email" placeholder="Enter child1 name" required [(ngModel)]='childname1' [disabled]="disablename1" ></ion-input>
+                        </ion-item>
+
+
+                        <ion-item >
+                            <h4 class="childnumber">Child one</h4>
+                        </ion-item>
+
+                        <ion-item >
+                            <ion-select class="selectel" placeholder="Age" [(ngModel)]='childage1' [disabled]="disableage1" >
+                                    
+                                <ion-select-option *ngFor="let age of childages1;" [value]='age'>
+                                  {{ age }}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item >
+
+                            <ion-select class="selectel" placeholder="Gender" [(ngModel)]='childgender1' [disabled]="disablegender1" >
+                                 
+                                <ion-select-option value='Boy'>Boy</ion-select-option>
+                                <ion-select-option value='Girl'>Girl</ion-select-option>
+                            </ion-select>
+
+                        </ion-item>
+                        <ion-item *ngFor="let day of childdays1;" >
+                            <ion-label>{{day['name']}}</ion-label>
+                            <ion-checkbox slot="end" value="{{day['num']}}" [(ngModel)]="day['checked']" disabled="{{day['disabled']}}" ></ion-checkbox>
+                        </ion-item>
+                        <ion-item >
+                          Recurring<ion-toggle class="recurringtoggle" color="success" [(ngModel)]='recurring1' [disabled]="disablerecurring1" ></ion-toggle>
+                        </ion-item>
+                    </ion-list>
+                    <!-- Children 1 (end) -->
+
+                    <!-- Children 2 (start) -->
+                    <ion-list class="childdetails" [hidden]=hiddenchild2 >
+                        <ion-item style="display: none;" >
+                          <ion-input name="email" placeholder="Enter child2 name" required  [(ngModel)]='childname2' [disabled]="disablename2" ></ion-input>
+                        </ion-item>
+
+                        <ion-item >
+                            <h4 class="childnumber">Child two</h4>
+                        </ion-item>
+
+                        <ion-item >
+                            <ion-select class="selectel" placeholder="Age" [(ngModel)]='childage2' [disabled]="disableage1" >
+                                    
+                                <ion-select-option *ngFor="let age of childages2;" [value]='age'>
+                                  {{ age }}
+                                </ion-select-option>
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item >
+                            <ion-select class="selectel" placeholder="Gender" [(ngModel)]='childgender2' [disabled]="disablegender2" >
+                                <ion-select-option value='Boy'>Boy</ion-select-option>
+                                <ion-select-option value='Girl'>Girl</ion-select-option>
+                                
+                            </ion-select>
+                        </ion-item>
+
+                        <ion-item *ngFor="let day of childdays2;" >
+                            <ion-label>{{day['name']}}</ion-label>
+                            <ion-checkbox slot="end" value="{{day['num']}}" [(ngModel)]="day['checked']" disabled="{{day['disabled']}}" ></ion-checkbox>
+                        </ion-item>
+                        <ion-item >
+                          Recurring<ion-toggle class="recurringtoggle" color="success" [(ngModel)]='recurring2' [disabled]="disablerecurring2"  ></ion-toggle>
+                        </ion-item>
+                    </ion-list>
+                    <!-- Children 2 (end) -->
+
+                </div>
+
+                <ion-item lines="none">
+                  <ion-button size="medium" type="button" (click)="addmore()" [hidden]=hiddenaddmore >Add more children...</ion-button>
+                </ion-item>
+
+                <ion-item class="morecomment" >
+                  <ion-textarea class="textarea" placeholder="More comments here..."   [(ngModel)]='staff_notes' [disabled]="disablecomment"></ion-textarea>
+                </ion-item>
+            </div>
+            <!-- Entry form (end) -->
+
+            <!-- View form (start) -->
+            <div [hidden]=hiddenviewform>
+                <div  padding>
+                  <h3 class="requestitemheading2" color="tertiary">Childcare Information</h3>
+                </div>
+                
+                <div padding *ngIf="status==1" lines="none" style="margin-top: 10px;">
+                  <ion-button size="medium" type="button" class="requestsbutton" (click)="contactstaff()">Contact</ion-button>
+                
+                </div>
+
+                <div [hidden]=hiddennotifications>
+                  <ion-item class="divraw" *ngIf="notificationList.length > 0" >
+                    <label >Notifications</label>
+                  </ion-item>
+
+                  <table class="notificationTable" width='100%' border='1' style='border-collapse: collapse;' *ngIf="notificationList.length > 0">
+                      <thead>
+                          <tr>
+                            <th widht='60%'>Notification</th>
+                            <th widht='40%'>Date & Time</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let item of notificationList;">
+                            <td>{{item['message']}}</td>
+                            <td>{{item['created_at']}}</td>
+                          </tr>
+                      </tbody>
+                  </table>
+               </div>
+
+                <div [hidden]=hiddenviewhelperdetails class="helperdetail">
+                  <ion-grid style="margin-top: 20px;">
+                  
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Helper name</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{hname}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                  </ion-grid>
+                </div>
+                
+                <div class="childdetailstable">
+
+                  <ion-grid style="margin-top: 20px;">
+                  
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Child Age</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{childage1}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Gender</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{childgender1}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Days</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{child1reviewdays}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Recurring</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{child1recurring}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                   
+                    <div class="child2details" [hidden]=hiddenchildrow2>
+                      <ion-row class="row">
+                          <ion-col class="col1" size='4.5'>
+                              <ion-label>Child Age</ion-label>
+                          </ion-col>
+                          <ion-col class="col2" size='7'>
+                              <label>{{childage2}}</label>
+                          </ion-col>
+                      </ion-row>
+
+                      <ion-row class="row">
+                          <ion-col class="col1" size='4.5'>
+                              <ion-label>Gender</ion-label>
+                          </ion-col>
+                          <ion-col class="col2" size='7'>
+                              <label>{{childgender2}}</label>
+                          </ion-col>
+                      </ion-row>
+
+                      <ion-row class="row">
+                          <ion-col class="col1" size='4.5'>
+                              <ion-label>Days</ion-label>
+                          </ion-col>
+                          <ion-col class="col2" size='7'>
+                              <label>{{child2reviewdays}}</label>
+                          </ion-col>
+                      </ion-row>
+
+                      <ion-row class="row">
+                          <ion-col class="col1" size='4.5'>
+                              <ion-label>Recurring</ion-label>
+                          </ion-col>
+                          <ion-col class="col2" size='7'>
+                              <label>{{child2recurring}}</label>
+                          </ion-col>
+                      </ion-row>
+
+                    </div>
+
+                  </ion-grid>
+
+                </div>
+
+                <ion-item class="morecomment" *ngIf="staff_notes2.trim() != '' ">
+                  <ion-textarea class="textarea" placeholder="More comments here..."   [(ngModel)]='staff_notes2' disabled="disabled"></ion-textarea>
+                </ion-item>
+
+            </div>
+            <!-- View form (end) -->
+
+          	<div style="display: none;">
+              <ion-item>
+                <ion-label position="floating">Requesting for date</ion-label>
+                <ion-datetime displayFormat="DD/MM/YYYY" min="{{requestminDate}}" max="{{requestmaxDate}}" [(ngModel)]='requestDate' disabled="{{disablrequestDate}}" ></ion-datetime>
+              </ion-item>
+              <ion-item style="display: none;">
+                <ion-label position="floating">Request Time</ion-label>
+                <ion-datetime displayFormat="H:mm:s" [(ngModel)]='requestTime' disabled="{{disablrequestTime}}"></ion-datetime>
+              </ion-item>
+            </div>
+
+          	<div [hidden]=hiddenreviewbutton padding>
+              <ion-button size="medium" type="button" class="requestsbutton" (click)="requestItems()" >Review</ion-button>
+            </div>
+            
+            <ion-item [hidden]=hiddenfeedback>
+              <ion-textarea class="textarea" placeholder="Enter feedback" [(ngModel)]='feedback' maxlength="400"  ></ion-textarea>
+            </ion-item>
+            <div [hidden]=hiddenfeedback padding>
+              <ion-button size="medium" type="button" class="requestsbutton" (click)="feedbackRequestItems()" >Feedback</ion-button>
+            </div>
+
+            <div *ngIf="status == 1" style="margin-top: 30px;">
+              <ion-label>Help received? <ion-toggle color="success" [(ngModel)]='checked' (ionChange)="receivedRequest()" style="padding-top: 3px;padding-bottom: 6px; margin-left: 10px;vertical-align: middle;"></ion-toggle></ion-label>
+            </div>
+            
+            <div class="divsubmitbutton" padding>
+              <ion-button [hidden]=hiddeneditsubmit size="medium" type="button" class="requestsbutton" (click)="editRequest()" >Edit</ion-button>&nbsp;
+              <ion-button [hidden]=hiddenrequestsubmit size="medium" type="button" class="requestsbutton" (click)="submitRequest()" >{{submitlabel}}</ion-button>
+              <ion-button [hidden]=hiddenrepostrequest size="medium" type="button" class="requestsbutton" (click)="submitRequest()" >Re-post</ion-button>
+              
+              <ion-item [hidden]=hiddenrequestcancel lines="none" >
+                <ion-button size="medium" color="danger" type="button" class="requestsbutton" (click)="cancelRequest()" >Cancel Request</ion-button>
+              </ion-item>
+            </div>
+          
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+
+</ion-content>

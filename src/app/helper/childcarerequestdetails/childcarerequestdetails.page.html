@@ -1,0 +1,190 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="searchhospitals"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="../assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid class='requestgrid' >
+      	<ion-row color="primary" justify-content-center class='formcenter'>
+
+        	<ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          
+	          	<div class="heading" padding>
+	            	<h3 class="hospitalname" color="tertiary">Request Summary {{id}}</h3>
+	          	</div>
+
+	          	
+            <div class="staffdetail">
+              
+
+              <ion-grid style="margin-top: 20px;">
+
+
+                  <ion-row class="row">
+                      <ion-col class="col1" size='4.5'>
+                          <ion-label>Request type</ion-label>
+                      </ion-col>
+                      <ion-col class="col2" size='7.5'>
+                        <ion-label>Childcare</ion-label>
+                      </ion-col>
+                    
+                  </ion-row>
+
+                  <ion-row class="row">
+                      <ion-col class="col1" size='4.5'>
+                          <ion-label>Hospital name</ion-label>
+                      </ion-col>
+                      <ion-col class="col2" size='7.5'>
+                        <ion-label>{{hospitalname}}</ion-label>
+                      </ion-col>
+                    
+                  </ion-row>
+
+                  <ion-row class="row">
+                      <ion-col class="col1" size='4.5'>
+                          <ion-label>Requestor name</ion-label>
+                      </ion-col>
+                      <ion-col class="col2" size='7.5'>
+                        <ion-label>{{name}}</ion-label>
+                      </ion-col>
+                    
+                  </ion-row>
+
+
+                </ion-grid>
+
+            </div>
+	          
+
+		      	<div class="requestsummary" padding>
+            		<label >Childcare information</label>
+          		</div>
+
+                <div class="childdetailstable">
+
+                  <ion-grid style="margin-top: 20px;">
+                  
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Child Age</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{childage1}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Gender</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{childgender1}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Days</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{child1reviewdays}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                    <ion-row class="row">
+                        <ion-col class="col1" size='4.5'>
+                            <ion-label>Recurring</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='7'>
+                            <label>{{child1recurring}}</label>
+                        </ion-col>
+                    </ion-row>
+
+                   
+
+                    <div class="child2details" [hidden]=hiddenchildrow2>
+                      <ion-row class="row">
+                          <ion-col class="col1" size='4.5'>
+                              <ion-label>Child Age</ion-label>
+                          </ion-col>
+                          <ion-col class="col2" size='7'>
+                              <label>{{childage2}}</label>
+                          </ion-col>
+                      </ion-row>
+
+                      <ion-row class="row">
+                          <ion-col class="col1" size='4.5'>
+                              <ion-label>Gender</ion-label>
+                          </ion-col>
+                          <ion-col class="col2" size='7'>
+                              <label>{{childgender2}}</label>
+                          </ion-col>
+                      </ion-row>
+
+                      <ion-row class="row">
+                          <ion-col class="col1" size='4.5'>
+                              <ion-label>Days</ion-label>
+                          </ion-col>
+                          <ion-col class="col2" size='7'>
+                              <label>{{child2reviewdays}}</label>
+                          </ion-col>
+                      </ion-row>
+
+                      <ion-row class="row">
+                          <ion-col class="col1" size='4.5'>
+                              <ion-label>Recurring</ion-label>
+                          </ion-col>
+                          <ion-col class="col2" size='7'>
+                              <label>{{child2recurring}}</label>
+                          </ion-col>
+                      </ion-row>
+
+                    </div>
+
+                  </ion-grid>
+
+                  
+                </div>
+
+                <ion-item [hidden]=hiddenstaffnote class="morecomment" >
+                  	<div class='textcontent'>
+          				  <p>{{staff_notes}}</p>
+          			</div>
+              </ion-item>
+
+              <div padding style="margin-top: 15px; margin-bottom: 15px;display: none;" >
+                <ion-item>
+                  <ion-label position="floating">Request Date</ion-label>
+                  <ion-datetime displayFormat="YYYY-MM-DD" [(ngModel)]='requestDate' min="{{requestminDate}}" max="{{requestmaxDate}}" disabled ></ion-datetime> 
+                </ion-item>
+                <ion-item>
+                  <ion-label position="floating">Request Time</ion-label>
+                  <ion-datetime displayFormat="H:mm:s" [(ngModel)]='requestTime' [disabled]=disableddateTime></ion-datetime>
+                </ion-item>
+              </div>
+
+              <div padding *ngIf="status==0" style="margin-top: 10px;">
+                <ion-button size="medium" type="button" class="requestsbutton" (click)="contactstaff()">Contact</ion-button>
+                <ion-button size="medium" type="button" class="requestsbutton" (click)="pickrequest()">Offer help</ion-button>
+              </div>
+
+              <div padding *ngIf="status==1" lines="none" style="margin-top: 10px;">
+                <ion-button size="medium" type="button" class="requestsbutton" (click)="contactstaff()">Contact</ion-button>
+                <ion-button size="medium" type="button" class="requestsbutton" (click)="cancelrequest()">Cancel</ion-button>
+              </div>
+              
+          		<ion-item class="contactnote" lines="none" [hidden]=hiddenreviewrequest>
+		        	<p>{{helpcontactmsg}}</p>
+		      	</ion-item>
+            <div class="searchbutton" padding>
+                
+                <ion-button size="medium" type="button" class="requestsbutton"  (click)="searchHospital()">Search Hospitals</ion-button>
+              </div>
+        	</ion-col>
+      	</ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	
+	<ion-grid >
+      	<ion-row color="primary" justify-content-center class='formcenter'>
+
+        	<ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          		
+              <ion-item>
+                <ion-label>Enable app notifications</ion-label>
+                <label><ion-toggle color="success" [(ngModel)]='enablenotification' (ionChange)="changeStatus()" ></ion-toggle></label>
+              </ion-item>
+
+              <ion-item [hidden]=hiddennearby >
+                <ion-label>Request from nearby Hospitals</ion-label>
+                <label><ion-toggle color="success" [(ngModel)]='enablenearby' (ionChange)="changeNearByStatus()" ></ion-toggle></label>
+              </ion-item>
+              
+              <ion-item lines="none" *ngIf="notificationsList.length > 0" >
+
+                  <ion-button size="medium" type="button" class="requestsbutton"  (click)="clearNotification(0,1,0)" style="position: absolute;right: 0;">Clear All</ion-button>
+                
+              </ion-item>
+
+	          	<div padding>
+	          		
+	            	<ion-card *ngFor="let item of notificationsList; let i = index">
+    					  	<ion-card-header (click)="viewRequest(item['requestid'])" >
+    					    	<ion-card-title style="font-size: 20px;">{{item['message']}}</ion-card-title>
+    					    	<p>{{item['created_at']}}</p>
+                    
+    					  	</ion-card-header>
+
+                  <ion-card-content>
+                    <p style="text-align: right;"><ion-label (click)="clearNotification(item['id'],2,i)">Clear</ion-label></p>
+                  </ion-card-content>
+    					  </ion-card>
+	          	</div>
+        	</ion-col>
+      	</ion-row>
+    </ion-grid>
+
+</ion-content>

@@ -1,0 +1,104 @@
+.requestgrid{
+	text-align: center;
+
+	margin-bottom: 50px;
+}
+
+.hospitalname{
+	border: 1px solid #5BCAA4;
+    width: 200px;
+    margin: 0 auto;
+    margin-top: 40px;
+    background: #5BCAA4;
+    color: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.heading{
+	
+	margin-top: 50px;
+	margin-bottom: 50px;
+
+	h2{
+		text-align: left;
+
+	}
+}
+
+.requestlist{
+    height: 200px;
+    max-height: 200px;
+    border: 1px solid black; 
+    overflow: auto;
+    width: 100%;
+}
+
+.requestsummary{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	font-weight: normal;
+    font-size: 19px;
+}
+.rawfood{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	font-weight: bold;
+    font-size: 17px;
+}
+
+.textcontent{
+	width: 80%;
+	margin: 0 auto;
+	border: 1px solid black;
+	padding: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.contactnote{
+	color: darkgray;
+	font-size: 15px;
+	margin-top: 70px;
+	text-align: left;
+}
+
+.backbutton{
+	margin-top: 40px;
+}
+
+.thankyou{
+	margin-top: 20px;
+	margin-bottom: 20px;
+	text-align: center;
+}
+.thankyou p{
+	width: 100%;
+}
+
+table{
+	thead{
+        background: lightgray;
+        font-weight: normal;
+    }
+	th,td{
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 3px;
+        padding-right: 3px;
+    }
+	//
+}
+
+.cardgrid{
+    font-size: 15px;
+    color: gray;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+ion-card-header{
+    padding: 7px !important;
+    color: darkgray;
+}

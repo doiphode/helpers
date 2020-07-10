@@ -1,0 +1,67 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-plugin-androidx": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-androidx-adapter": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-device": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-fcm-with-dependecy-updated": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-file": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-ionic-keyboard": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-ionic-webview": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-nativestorage": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-whitelist": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-plugin-x-socialsharing": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "cordova-sms-plugin": {
+      "PACKAGE_NAME": "com.helpthe.nhs"
+    },
+    "cordova-plugin-android-permissions": {
+      "PACKAGE_NAME": "com.helpthe.nhs"
+    },
+    "cordova-plugin-badge": {
+      "PACKAGE_NAME": "com.helpthe.nhs"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-wkwebview-engine": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    },
+    "es6-promise-plugin": {
+      "PACKAGE_NAME": "com.hospital.ionic"
+    }
+  }
+}

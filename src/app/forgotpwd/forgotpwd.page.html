@@ -1,0 +1,78 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+       
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+      <ion-row color="primary" justify-content-center class='formcenter'>
+
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          	
+          	<div padding [hidden]=hiddenenteremail >
+          		<div class="logintitle"  text-center>
+	            	<h2>Forgot Password</h2>
+	          	</div>
+            	<ion-item class='txtitem' lines="none">
+            		<ion-input name="email" type="email" [(ngModel)]='forgot_email' placeholder="Enter your registered email-id" required></ion-input>
+
+	              	<ion-input [(ngModel)]='code' [hidden]=hiddencode ></ion-input>
+	            </ion-item>
+
+	            <div >
+	            	<ion-item lines="none" style="border: 0;">
+	            		<ion-button size="medium" type="button" (click)='sendEmail()'  expand="block" [disabled]=disablesubmit>Submit</ion-button>
+	            	</ion-item>
+	            </div>
+          	</div>
+
+	        <div [hidden]=hiddenentercode padding>
+	        	<div class="logintitle"  text-center>
+	            	<h2>Forgot Password</h2>
+	          	</div>
+	        	<ion-item lines="none" style="width: 80%;margin: 0 auto;" >
+	        		<p class="colorred">Please check your email for a verification code.</p>
+	        	</ion-item>
+ 
+	        	<ion-item class='txtitem' lines="none">
+            		<ion-input [(ngModel)]='verifycode' placeholder="Enter verification code" required></ion-input>
+	            </ion-item>
+
+	            <div >
+	            	<ion-item lines="none" style="border: 0;">
+	            		<ion-button size="medium" type="button" (click)='checkCode()'  expand="block">Verify</ion-button>
+	            	</ion-item>
+	            </div>
+	        </div>
+
+	        <div [hidden]=hiddenenterpwd padding>
+
+	        	<div class="logintitle"  text-center>
+	            	<h2>Change Password</h2>
+	          	</div>
+
+	        	<ion-item class='txtitem' lines="none">
+            		<ion-input type="password" [(ngModel)]='newpassword' placeholder="Enter new password" required></ion-input>
+	            </ion-item>
+
+	            <div >
+	            	<ion-item lines="none" style="border: 0;">
+	            		<ion-button size="medium" type="button" (click)='changepassword()'  expand="block">Submit</ion-button>
+	            	</ion-item>
+	            </div>
+	        </div>
+
+          	<div padding class="text-center" class="loginlink">
+          	Already a member? <span (click)='openLogin()'><b>Login</b></span> 
+          	</div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

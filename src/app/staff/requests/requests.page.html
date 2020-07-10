@@ -1,0 +1,46 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+       
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="../assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+	<ion-grid class="requestgrid" >
+      <ion-row color="primary" justify-content-center class='formcenter'>
+
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          <div class="divtextcenter"  text-center>
+            <!-- <h3><img src="assets/icon/favicon-96x96.png"></h3> -->
+            <label >Request for...</label>
+          </div>
+          
+          <div padding>
+            <ion-button size="medium" color="tertiary" type="button" class="requestsbutton" (click)="childcarerequest()" >Childcare</ion-button>
+          </div>
+          
+          <div  padding>
+            <ion-button size="medium" color="tertiary" type="button" class="requestsbutton" (click)="foodrequest()" >Food</ion-button>
+          </div>
+
+          <div padding>
+            <ion-button size="medium" color="tertiary" type="button" class="requestsbutton" (click)="essentialsrequest()">Essentials</ion-button>
+          </div>
+
+          <div class="footerheading">
+            <ion-label>Helping the <span style="font-weight: 900;
+    font-size: 24px;
+    font-style: italic;margin-left: 5px;
+    color: #5BCAA4;">NHS</span></ion-label>
+          </div>
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+</ion-content>

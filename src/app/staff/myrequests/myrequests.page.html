@@ -1,0 +1,194 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="../assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid class="requestgrid" >
+      <ion-row color="primary" justify-content-center class='formcenter'>
+
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+                    
+          <div  padding>
+            <h3 class="requestitemheading" color="tertiary">My Requests</h3>
+          </div>
+          
+          <div padding style="margin-top: 40px">
+              
+              <!-- Acknowledged -->
+              <ion-card *ngFor="let list of acknowledgedList; let i= index">
+                  <ion-card-header >
+                    <ion-grid class="cardgrid" >
+                      <ion-row class="row">
+                        <ion-col class="col1" size='7' (click)="review(list['cartid'],list['type'],1)">
+                            <ion-label class="bold">{{list['type']}}</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='5'>
+                             <ion-label>Status: <span style="color: deepskyblue;">Confirmed</span></ion-label>
+                        </ion-col>
+                      
+                      </ion-row>
+                      <ion-row class="row" (click)="review(list['cartid'],list['type'],1)" *ngIf="list['type'] == 'Childcare'" >
+                        <ion-col class="col1" size='7'>
+                            <ion-label>For: {{list['childdetail']}}</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='5'>
+                             <ion-label>Recurring: <span class="bold">{{list['recurring']}}</span></ion-label>
+                        </ion-col>
+                      
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-header>
+              </ion-card>
+
+              <!-- Pending -->
+              <ion-card *ngFor="let list of pendingList;" >
+                  <ion-card-header >
+                    <ion-grid class="cardgrid" (click)="review(list['cartid'],list['type'],2)" >
+                      <ion-row class="row">
+                        <ion-col class="col1" size='7' >
+                            <ion-label class="bold">{{list['type']}}</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='5'>
+                             <ion-label>Status: <span *ngIf="!list['expire']" style="color: orange;">In queue</span><span *ngIf="list['expire']" style="color: red;">Expired</span></ion-label>
+                        </ion-col>
+                      
+                      </ion-row>
+                      <ion-row class="row">
+                        <ion-col class="col1" size='12'>
+                            <ion-label>Requested for: {{list['date']}}</ion-label>
+                        </ion-col>
+                       
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-header>
+              </ion-card>
+
+              <!-- Received -->
+              <ion-card *ngFor="let list of receivedList;"  >
+                  <ion-card-header >
+                    <ion-grid class="cardgrid" (click)="review(list['cartid'],list['type'],3)" >
+                      <ion-row class="row">
+                        <ion-col class="col1" size='7' >
+                            <ion-label class="bold" >{{list['type']}}</ion-label>
+                        </ion-col>
+                        <ion-col class="col2" size='5'>
+                             <ion-label>Status: <span style="color: green;">Completed</span></ion-label>
+                        </ion-col>
+                      
+                      </ion-row>
+                      <ion-row class="row">
+                        <ion-col class="col1" size='7'>
+                            <ion-label>Fulfilled on: {{list['received_date']}}</ion-label>
+                        </ion-col>
+                        <ion-col class="col1" size='5'>
+                            <ion-label>Helper: <span class="bold">{{list['helpername']}}</span></ion-label>
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-header>
+              </ion-card>
+
+          </div>
+
+          <!-- Acknowledged -->
+          <div class="requesttype" padding [hidden]=hiddenrow>
+            <label >Acknowledged</label>
+          </div>
+          <div class="requestitems" [hidden]=hiddenrow>
+          	<table width='100%' border='1' style='border-collapse: collapse;'>
+          		<thead>
+          			<tr>
+          				<th width='20%'>Request type</th>
+          				<th width='50%'>Helper name</th>
+          				<th width='30%'>Confirmed</th>
+          			</tr>
+          		</thead>
+          		<tbody>
+                <tr  *ngFor="let list of acknowledgedList; let i= index" >
+                  <td (click)="review(list['cartid'],list['type'],1)">{{list['type']}}</td>
+                  <td (click)="review(list['cartid'],list['type'],1)">{{list['helper']}}</td>
+                 
+                  <td></td>
+                </tr>
+
+                <tr  [hidden]=hiddennotfoundacknowledged>
+                  <td colspan='3'>No record found.</td>
+                </tr>
+          		</tbody>
+          	</table>
+          </div>
+
+          <!-- Pending -->
+          <div class="requesttype" padding [hidden]=hiddenrow>
+            <label >Pending</label>
+          </div>
+          <div class="requestitems" [hidden]=hiddenrow>
+          	<table width='100%' border='1' style='border-collapse: collapse;'>
+          		<thead>
+          			<tr>
+          				<th width='20%'>Request type</th>
+          				<th width='50%'>Requested for</th>
+          				<th width='30%'>Status</th>
+          			</tr>
+          		</thead>
+          		<tbody>
+          			<tr  *ngFor="let list of pendingList;" (click)="review(list['cartid'],list['type'],2)">
+          				<td>{{list['type']}}</td>
+          				<td>{{list['date']}}</td>
+          				<td *ngIf="!list['expire']">In queue</td>	
+                  <td *ngIf="list['expire']">Expired</td> 
+          			</tr>
+                <tr  [hidden]=hiddennotfoundpending>
+                  <td colspan='3'>No record found.</td>
+                </tr>          			
+          		</tbody>
+          	</table>
+          </div>
+
+          <!-- Received -->
+          <div class="requesttype" padding [hidden]=hiddenrow>
+            <label >Received</label>
+          </div>
+          <div class="requestitems" [hidden]=hiddenrow>
+          	<table width='100%' border='1' style='border-collapse: collapse;'>
+          		<thead>
+          			<tr>
+          				<th width='20%'>Request type</th>
+          				<th width='50%'>Requested for</th>
+          				<th width='30%'>Completed</th>
+          			</tr>
+          		</thead>
+          		<tbody>
+          			<tr *ngFor="let list of receivedList;" (click)="review(list['cartid'],list['type'],3)" >
+          				<td >{{list['type']}}</td>
+          				<td >{{list['received_date']}}</td>
+          				<td >{{list['feedbacklabel']}}</td>	
+          			</tr>  
+
+                <tr  [hidden]=hiddennotfoundreceived>
+                  <td colspan='3'>No record found.</td>
+                </tr>        			
+          		</tbody>
+          	</table>
+          </div>
+
+          <div padding style="margin-top: 40px;" *ngIf="acknowledgedList.length == 0 && pendingList.length == 0 && receivedList.length == 0">
+              <ion-label style="font-weight: bold;color: #5BCAA4;">There are no requests to show.</ion-label>
+          </div>
+
+          	<div padding  >
+              <ion-button size="medium" type="button" class="requestsbutton" (click)="makerequest()" >Make a Request</ion-button>
+            </div>
+
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+</ion-content>

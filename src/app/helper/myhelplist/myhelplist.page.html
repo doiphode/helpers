@@ -1,0 +1,93 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="../assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid class='requestgrid' >
+      	<ion-row color="primary" justify-content-center class='formcenter'>
+
+        	<ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          
+	          	<div class="heading" padding>
+	            	<h3 class="hospitalname" color="tertiary">My Help List</h3>
+	          	</div>
+
+	          	<div class="requestsummary" padding [hidden]=hiddenrequestnotfound>
+            		<label >Your help list is empty</label>
+          		</div>
+
+          		<div class="requestsummary" padding [hidden]=hiddenrequestfound>
+            		<label >You have confirmed to help with the following requests</label>
+          		</div>
+
+          		<div style="margin-top: 40px;" padding [hidden]=hiddenrequestfound>
+          			<!-- Received -->
+		            <ion-card *ngFor="let item of itemsList;"   >
+		                <ion-card-header >
+		                    <ion-grid class="cardgrid" (click)="viewrequest(item['type'],item['id'])" >
+		                      <ion-row class="row">
+		                        <ion-col class="col1" size='7' >
+		                            <ion-label>{{item['type']}}</ion-label>
+		                        </ion-col>
+		                        <ion-col class="col2" size='5'>
+		                             <ion-label>Status: <span *ngIf="item['remain'] == 'Confirmed'" style="color: green;">{{item['remain']}}</span><span *ngIf="item['remain'] == 'Delivered'" style="color: orange;">{{item['remain']}}</span></ion-label>
+		                        </ion-col>
+		                      
+		                      </ion-row>
+		                      <ion-row class="row">
+		                        <ion-col class="col1" size='7'>
+		                            <ion-label>Hospital: {{item['hospital']}}</ion-label>
+		                        </ion-col>
+		                        <ion-col class="col1" size='5'>
+		                            <ion-label>Staff: {{item['staffname']}}</ion-label>
+		                        </ion-col>
+		                      </ion-row>
+		                    </ion-grid>
+		                </ion-card-header>
+		            </ion-card>
+          		</div>
+          		<div class="requestitems" [hidden]=hiddenrequestfound style="display: none;">
+		          	<table width='100%' border='1' style='border-collapse: collapse;'>
+		          		<thead>
+		          			<tr>
+		          				<th width='20%'>Request type</th>
+		          				<th width='30%'>Hospital</th>
+		          				<th width='30%'>Staff name</th>
+		          				<th width='20%'>Status</th>
+		          			</tr>
+		          		</thead>
+		          		<tbody>
+		          			<tr *ngFor="let item of itemsList;" (click)="viewrequest(item['type'],item['id'])" >
+		          				<td>{{item['type']}}</td>
+		          				<td>{{item['hospital']}}</td>
+		          				<td>{{item['staffname']}}</td>
+		          				<td>{{item['remain']}}</td>
+		          			</tr>
+
+		          			<tr  [hidden]=hiddennotfound>
+			                  <td colspan='4'>No record found.</td>
+			                </tr>
+		          		</tbody>
+		          	</table>
+		        </div>
+
+          		<div class="backbutton" padding>
+          			<ion-button size="medium" type="button" class="requestsbutton"  (click)="back()">&#60; Back</ion-button>
+          		</div>
+
+          		<ion-item class="contactnote" lines="none">
+		        	<p>* Please show the receipts where required, so that the NHS staff can pay the correct amount. Thank you for helping!</p>
+		      	</ion-item>
+
+
+        	</ion-col>
+      	</ion-row>
+    </ion-grid>
+</ion-content>

@@ -1,0 +1,58 @@
+.requestgrid{
+	text-align: center;
+}
+
+.hospitalname{
+	border: 1px solid #5BCAA4;
+    margin: 0 auto;
+    margin-top: 40px;
+    background: #5BCAA4;
+    color: white;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.heading{
+	h2{
+		text-align: left;
+		margin-top: 40px;
+        font-size: 21px;
+	}
+}
+
+.requestlist{
+    height: auto;
+    max-height: 200px;
+    border: 1px solid black; 
+    overflow: auto;
+    width: 100%;
+}
+
+.headerrow{
+   
+    background: lightgray;
+   
+}
+
+.requestlist{
+    .foodlist{
+        border-bottom: groove;
+    }
+    
+}
+ion-row:last-child {
+    border-bottom: 0 !important;
+}
+
+.cardgrid{
+    font-size: 15px;
+    color: gray;
+    padding: 0;
+    margin: 0;
+    text-align: left;
+}
+
+ion-card-header{
+    padding: 7px !important;
+    color: darkgray;
+}

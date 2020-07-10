@@ -1,0 +1,67 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+     
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-grid>
+      <ion-row color="primary" justify-content-center class='formcenter' >
+
+        <ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          <div class="logintitle"  text-center>
+            <!-- <h3><img src="assets/icon/favicon-96x96.png"></h3> -->
+            <h2>Log In</h2>
+          </div>
+
+            <div padding>
+              <ion-item> 
+                <ion-input name="email" type="email" [(ngModel)]='login_email' placeholder="Enter your email" ngModel required (keyup.enter)="loginUser()" ></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-input name="password" type="password" [(ngModel)]='login_password' placeholder="Enter your password" ngModel required (keyup.enter)="loginUser()"></ion-input>
+              </ion-item>
+            </div>
+            <div padding style="margin-top: 10px;">
+              <ion-item lines="none" style="border: 0;">
+                <ion-button size="medium" type="button" (click)='loginUser()'  expand="block">Login</ion-button>
+              </ion-item>
+              
+            </div>
+            <div padding class="text-center forgotpwd">
+              <span (click)='openForgotPassword()'><b>Forgot Password</b></span> 
+            </div>
+            <div padding class="text-center">
+            	Not a member? <span (click)='openRegisterPage()'><b>REGISTER</b></span>  
+            </div>
+                  
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+
+     <ion-button [hidden]=hidden1 (click)="getlocation()" expand="block">Get Location</ion-button>
+
+  <ion-list [hidden]=hidden1>
+    <ion-list-header>
+      <ion-label>Location Info</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>
+        Latitue
+      </ion-label>
+      <ion-badge slot="end">{{lat}}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        longitude
+      </ion-label>
+      <ion-badge slot="end">{{lng}}</ion-badge>
+    </ion-item>
+    </ion-list>
+</ion-content>

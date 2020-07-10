@@ -1,0 +1,71 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+       
+      </ion-menu-button>
+    </ion-buttons>
+   	<ion-title class="apphead"><img src="../assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	
+	<ion-grid >
+      	<ion-row color="primary" justify-content-center class='formcenter'>
+
+        	<ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          		<div class="diventeras"  text-center>
+           			<h2>Search nearby Hospitals</h2>
+          		</div>
+          
+	          	<div  padding>
+	            	<ion-searchbar placeholder="Enter a Postcode"  [(ngModel)]='postcode' (ionChange)="changepostcode()" ></ion-searchbar>
+	          	</div>
+	          	<div padding [hidden]=hiddenmiles>
+	          		<ion-select placeholder="5 Miles" [(ngModel)]='mile' (ionChange)="selectDistance()" >
+	          			<ion-select-option *ngFor="let distance of distanceArray;" [value]="distance">
+			    			{{ distance }} Miles
+			    		</ion-select-option>
+	    			</ion-select>
+	          	</div>
+	          	<div  padding>
+	            	<ion-searchbar placeholder="Search by Hospital name" (ionInput)="filterHospital($event)" [(ngModel)]='hospital' ></ion-searchbar>
+	          	</div>
+
+	          	<div class="diventeras" text-center>
+           			<h2>Results <span [hidden]=hiddennearyourpostcode>near your postcode</span> </h2>
+          		</div>
+
+          		<ion-item lines="none" [hidden]=hiddensearching>
+		      		<p class="searching" >Searching...</p>
+		      	</ion-item>
+
+		      	<ion-item lines="none" [hidden]=hiddennotfound>
+		      		<p class="searching" >Not found.</p>
+		      	</ion-item>
+
+	          	<div padding>
+	          		
+	            	<ion-card *ngFor="let item of hospitalList;">
+	            		<div class="countrequests" *ngIf="item['countrequests'] > 0">
+	            			<div class='circle'>{{item['countrequests']}}</div>
+	            		</div>
+					  	<ion-card-header (click)="viewrequests(item['name'],item['id'],item['countrequests'])">
+					    	<ion-card-title class="hospitalnamelbl">{{item['name']}} {{item['distance']}}</ion-card-title>
+					    	<p>{{item['address']}}</p>
+					  	</ion-card-header>
+
+					</ion-card>
+					<ion-infinite-scroll threshold="100px" (ionInfinite)="loadMore($event)" >
+			            <ion-infinite-scroll-content
+			                loadingSpinner="bubbles"
+			                loadingText="Loading more data...">
+			            </ion-infinite-scroll-content>
+			        </ion-infinite-scroll>
+	          	</div>
+        	</ion-col>
+      	</ion-row>
+    </ion-grid>
+
+</ion-content>

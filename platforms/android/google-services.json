@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "620549752651",
+    "firebase_url": "https://helpers-e2dd0.firebaseio.com",
+    "project_id": "helpers-e2dd0",
+    "storage_bucket": "helpers-e2dd0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:620549752651:android:0075f8a77f2ca9cc954ace",
+        "android_client_info": {
+          "package_name": "com.helpers.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "620549752651-ec5hi5ed8p171n6lp7rpksl7k19ugq5g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCtUNd407BIl-EluMDzidbD3VPeYtTa3kM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "620549752651-ec5hi5ed8p171n6lp7rpksl7k19ugq5g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

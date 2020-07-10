@@ -1,0 +1,9 @@
+{
+  "appId": "com.hospital.ionic",
+  "appName": "hospital",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "cordova": {},
+  "allowMixedContent": true
+}

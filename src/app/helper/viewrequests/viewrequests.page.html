@@ -1,0 +1,181 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="searchhospitals"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="apphead"><img src="../assets/banner.png" style=" vertical-align: middle;"></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+	
+	<ion-grid class='requestgrid' >
+      	<ion-row color="primary" justify-content-center class='formcenter'>
+
+        	<ion-col align-self-center size-md="12" size-lg="12" size-xs="12">
+          		<div  padding>
+            		<h3 class="hospitalname" color="tertiary">{{hospitalname}}</h3>
+          		</div>
+          		
+
+          		<div style="margin-top: 40px;" padding [hidden]=hiddenrequestfound>
+          			<!-- Received -->
+		            <ion-card *ngFor="let list of requestsList;"   >
+		                <ion-card-header >
+		                    <ion-grid class="cardgrid" (click)="viewrequest(list['type'],list['id'])">
+		                      <ion-row class="row">
+		                        <ion-col class="col1" size='12' >
+		                            <ion-label style="font-weight: bold;">{{list['type']}}</ion-label>
+		                        </ion-col>
+		                        		                      
+		                      </ion-row>
+		                      <ion-row class="row" *ngIf="list['type'] == 'Food'">
+		                        <ion-col class="col1" size='12'>
+		                            <ion-label>Meals: {{list['ready_meal']}} </ion-label>
+		                        </ion-col>
+		                       
+		                      </ion-row>
+
+		                      <ion-row class="row" *ngIf="list['type'] == 'Essentials'">
+		                        <ion-col class="col1" size='12'>
+		                            <ion-label [innerHTML]="list['items']"></ion-label>
+		                       </ion-col>
+		                        </ion-row>
+		                       <ion-row class="row" *ngIf="list['type'] == 'Childcare'">
+		                        	<ion-col class="col1" size='7'>
+			                            <ion-label>For: {{list['childdetail']}}</ion-label>
+			                        </ion-col>
+			                        <ion-col class="col2" size='5'>
+			                             <ion-label>Recurring: {{list['recurring']}}</ion-label>
+			                        </ion-col>
+		                      </ion-row>
+		                      <ion-row class="row" >
+		                        <ion-col class="col1" size='12'>
+		                            <ion-label *ngIf="list['type'] =='Food' || list['type'] == 'Essentials' ">Requested for: {{list['date']}} </ion-label>
+		                            <ion-label *ngIf="list['type'] =='Childcare' ">Requested on: {{list['date']}} </ion-label>
+		                        </ion-col>
+		                       
+		                      </ion-row>
+		                    </ion-grid>
+		                </ion-card-header>
+		            </ion-card>
+
+		            <ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreRequests($event)" [hidden]=hiddenloadmore1>
+			              	<ion-infinite-scroll-content
+			                loadingSpinner="bubbles"
+			                loadingText="Loading more data...">
+			              	</ion-infinite-scroll-content>
+			        </ion-infinite-scroll>
+          		</div>
+
+	          	<ion-item [hidden]=hiddenfoodrequests lines="none" class="heading" padding>
+	            	<h2>Food</h2>
+	          	</ion-item>
+
+	          	<ion-item [hidden]=hiddenfoodrequests lines="none" >
+            		<div class="requestlist" >
+            			<ion-row class="headerrow"  >
+				        	<ion-col col-6>
+						    	Read meal
+						  	</ion-col>
+						    <ion-col col-6>
+						     	Requested for
+						    </ion-col>
+				        </ion-row>
+            			<ion-row style="border-top: groove;" *ngFor="let list of foodList;let last=last;" (click)="foodrequestDetails(list['id'])" >
+				        	<ion-col col-6>
+						    	{{list['ready_meal']}} 
+						  	</ion-col>
+						    <ion-col col-6>
+						     	{{list['date']}}
+						    </ion-col>
+				        </ion-row>
+
+						<ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreFoodrequests($event)" [hidden]=hiddenloadmore1>
+			              	<ion-infinite-scroll-content
+			                loadingSpinner="bubbles"
+			                loadingText="Loading more data...">
+			              	</ion-infinite-scroll-content>
+			            </ion-infinite-scroll>
+
+					</div>
+          		</ion-item>
+	          	
+	          	<ion-item [hidden]=hiddenessentialrequests class="heading" lines="none" padding>
+	            	<h2>Essentials</h2>
+	          	</ion-item>
+
+	          	<ion-item [hidden]=hiddenessentialrequests lines="none" >
+            		<div class="requestlist" >
+            			<ion-row class="headerrow" >
+				        	<ion-col col-6>
+						    	Meals
+						  	</ion-col>
+						    <ion-col col-6>
+						     	Requested for
+						    </ion-col>
+				        </ion-row>
+            			<ion-row style="border-top: groove;" *ngFor="let list of essentialList;" (click)="essentialsrequestDetails(list['id'])" >
+				        	<ion-col col-6 [innerHTML]="list['items']">
+						    
+						  	</ion-col>
+						    <ion-col col-6>
+						     	{{list['date']}}
+						    </ion-col>
+				        </ion-row>
+
+						<ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreEssentialrequests($event)" [hidden]=hiddenloadmore2>
+			              	<ion-infinite-scroll-content
+			                loadingSpinner="bubbles"
+			                loadingText="Loading more data...">
+			              	</ion-infinite-scroll-content>
+			            </ion-infinite-scroll>
+
+					</div>
+          		</ion-item>
+
+          		<ion-item [hidden]=hiddenchildcarerequests lines="none" class="heading" padding>
+	            	<h2>ChildCare</h2>
+	          	</ion-item>
+
+	          	<ion-item [hidden]=hiddenchildcarerequests lines="none">
+            		<div class="requestlist">
+            			<ion-row class="headerrow" >
+				        	<ion-col col-4>
+						    	Queue
+						  	</ion-col>
+						  	<ion-col col-4>
+						    	Age
+						  	</ion-col>
+						    <ion-col col-4>
+						     	Requested for
+						    </ion-col>
+				        </ion-row>
+            			<ion-row style="border-top: groove;" *ngFor="let list of childcareList;" (click)="childcarerequestDetails(list['id'])" >
+				        	<ion-col col-4>
+						    	{{list['child']}}
+						  	</ion-col>
+						    <ion-col col-4>
+						     	{{list['age']}}
+						    </ion-col>
+						    <ion-col col-4>
+						     	{{list['days']}}
+						    </ion-col>
+				        </ion-row>
+
+						<ion-infinite-scroll threshold="100px" (ionInfinite)="loadMoreChildcarerequests($event)" [hidden]=hiddenloadmore3 >
+			              	<ion-infinite-scroll-content
+			                loadingSpinner="bubbles"
+			                loadingText="Loading more data...">
+			              	</ion-infinite-scroll-content>
+			            </ion-infinite-scroll>
+
+					</div>
+          		</ion-item>
+
+
+        	</ion-col>
+      	</ion-row>
+    </ion-grid>
+
+</ion-content>
